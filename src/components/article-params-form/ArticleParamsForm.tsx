@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import { Select } from 'src/ui/select';
 import { RadioGroup } from 'src/ui/radio-group';
 import { Separator } from 'src/ui/separator';
+import clsx from 'clsx';
 import {
 	fontFamilyOptions,
 	fontColors,
@@ -49,7 +50,8 @@ export const ArticleParamsForm = ({
 		};
 	}
 
-	function handleApply() {
+	function handleSubmit(e: FormEvent) {
+		e.preventDefault();
 		onApply(params);
 	}
 
@@ -62,10 +64,13 @@ export const ArticleParamsForm = ({
 		<>
 			<ArrowButton isOpen={isOpen} onClick={onToggle} />
 			<aside
-				className={`${styles.container} ${
-					isOpen ? styles.container_open : ''
-				}`}>
-				<form className={styles.form}>
+				className={clsx(styles.container, {
+					[styles.container_open]: isOpen,
+				})}>
+				<form
+					className={styles.form}
+					onSubmit={handleSubmit}
+					onReset={handleReset}>
 					<h2 className={styles.title}>Задайте параметры</h2>
 					<Select
 						selected={params.fontFamilyOption}
@@ -100,18 +105,8 @@ export const ArticleParamsForm = ({
 						title='Ширина контента'
 					/>
 					<div className={styles.bottomContainer}>
-						<Button
-							title='Сбросить'
-							htmlType='button'
-							type='clear'
-							onClick={handleReset}
-						/>
-						<Button
-							title='Применить'
-							htmlType='button'
-							type='apply'
-							onClick={handleApply}
-						/>
+						<Button title='Сбросить' htmlType='reset' type='clear' />
+						<Button title='Применить' htmlType='submit' type='apply' />
 					</div>
 				</form>
 			</aside>
