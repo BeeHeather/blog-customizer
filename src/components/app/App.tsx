@@ -1,12 +1,12 @@
 import { CSSProperties, useState } from 'react';
-import { Article } from './components/article/Article';
-import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
+import { Article } from '../article/Article';
+import { ArticleParamsForm } from '../article-params-form/ArticleParamsForm';
 import {
 	defaultArticleState,
 	ArticleStateType,
-} from './constants/articleProps';
-import './styles/index.scss';
-import styles from './styles/index.module.scss';
+} from '../../constants/articleProps';
+import '../../styles/index.scss';
+import styles from './index.module.scss';
 
 export default function App() {
 	const [isFormOpen, setIsFormOpen] = useState(false);
