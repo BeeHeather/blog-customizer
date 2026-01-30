@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, FormEvent, useRef } from 'react';
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import { Select } from 'src/ui/select';
@@ -15,6 +15,7 @@ import {
 	defaultArticleState,
 	OptionType,
 } from 'src/constants/articleProps';
+import { useCloseOnOutsideClickOrEsc } from 'src/ui/select/hooks/useCloseOnOutsideClickOrEsc';
 
 import styles from './ArticleParamsForm.module.scss';
 
@@ -34,12 +35,19 @@ export const ArticleParamsForm = ({
 	initialParams,
 }: ArticleParamsFormProps) => {
 	const [params, setParams] = useState(defaultArticleState);
+	const formRef = useRef<HTMLFormElement>(null);
 
 	useEffect(() => {
 		if (isOpen) {
 			setParams(initialParams);
 		}
 	}, [isOpen, initialParams]);
+
+	useCloseOnOutsideClickOrEsc({
+		isOpenElement: isOpen,
+		elementRef: formRef,
+		onClose: onToggle,
+	});
 
 	function handleChange(key: keyof typeof params) {
 		return function (value: OptionType) {
@@ -68,6 +76,7 @@ export const ArticleParamsForm = ({
 					[styles.container_open]: isOpen,
 				})}>
 				<form
+					ref={formRef}
 					className={styles.form}
 					onSubmit={handleSubmit}
 					onReset={handleReset}>
