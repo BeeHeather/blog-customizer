@@ -15,7 +15,7 @@ export default function App() {
 
 	const handleToggleForm = () => {
 		if (!isFormOpen) {
-			setInitialParams(currentParams);
+			setInitialParams(defaultArticleState);
 		}
 		setIsFormOpen(!isFormOpen);
 	};
@@ -25,7 +25,7 @@ export default function App() {
 	};
 
 	const handleReset = () => {
-		setCurrentParams(initialParams);
+		setCurrentParams(defaultArticleState);
 	};
 
 	return (
