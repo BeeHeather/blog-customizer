@@ -11,12 +11,9 @@ import styles from './index.module.scss';
 export default function App() {
 	const [isFormOpen, setIsFormOpen] = useState(false);
 	const [currentParams, setCurrentParams] = useState(defaultArticleState);
-	const [initialParams, setInitialParams] = useState(defaultArticleState);
+	const [initialParams] = useState(currentParams);
 
 	const handleToggleForm = () => {
-		if (!isFormOpen) {
-			setInitialParams(defaultArticleState);
-		}
 		setIsFormOpen(!isFormOpen);
 	};
 

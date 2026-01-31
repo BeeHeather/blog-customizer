@@ -38,10 +38,8 @@ export const ArticleParamsForm = ({
 	const formRef = useRef<HTMLFormElement>(null);
 
 	useEffect(() => {
-		if (isOpen) {
-			setParams(initialParams);
-		}
-	}, [isOpen, initialParams]);
+		setParams(initialParams);
+	}, []);
 
 	useCloseOnOutsideClickOrEsc({
 		isOpenElement: isOpen,
